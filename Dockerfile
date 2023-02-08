@@ -2,7 +2,11 @@
 # RcloneBrowser Dockerfile
 #
 
-FROM jlesage/baseimage-gui:alpine-3.12-glibc
+FROM jlesage/baseimage-gui:debian-11-v4
+LABEL org.opencontainers.image.authors="xxx@163.com"
+
+# Set environment variables.
+ENV APP_NAME    "RcloneBrowser"
 
 # Define build arguments
 ARG RCLONE_VERSION=current
@@ -14,30 +18,16 @@ ENV ARCH=amd64
 WORKDIR /tmp
 
 # Install Rclone Browser dependencies
+RUN add-pkg \
+      ca-certificates fonts-wqy-zenhei locales \
+      fuse wget \
+      libgl1 libglib2.0-0 \
 
-RUN apk --no-cache add \
-      ca-certificates \
-      fuse \
-      wget \
-      qt5-qtbase \
-      qt5-qtbase-x11 \
-      libstdc++ \
-      libgcc \
-      dbus \
-      xterm \
     && cd /tmp \
     && wget -q http://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
     && unzip /tmp/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
     && mv /tmp/rclone-*-linux-${ARCH}/rclone /usr/bin \
     && rm -r /tmp/rclone* && \
-
-    apk add --no-cache --virtual=build-dependencies \
-        build-base \
-        cmake \
-        make \
-        gcc \
-        git \
-        qt5-qtbase qt5-qtmultimedia-dev qt5-qttools-dev && \
 
 # Compile RcloneBrowser
     git clone https://github.com/kapitainsky/RcloneBrowser.git /tmp && \
@@ -48,19 +38,18 @@ RUN apk --no-cache add \
     ls -l /tmp/build && \
     cp /tmp/build/build/rclone-browser /usr/bin  && \
 
-    # cleanup
-     apk del --purge build-dependencies && \
+# cleanup
     rm -rf /tmp/*
-
+    
+RUN sed-patch 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    locale-gen
+ENV LANG=en_US.UTF-8
 
 # Add files.
 COPY rootfs/ /
 COPY VERSION /
 COPY main-window-selection.jwmrc /etc/jwm/main-window-selection.jwmrc
 
-# Set environment variables.
-ENV APP_NAME="RcloneBrowser" \
-    S6_KILL_GRACETIME=8000
 
 # Define mountable directories.
 VOLUME ["/config"]
