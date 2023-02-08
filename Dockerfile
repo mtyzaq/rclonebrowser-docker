@@ -30,8 +30,7 @@ RUN add-pkg \
     && rm -r /tmp/rclone*
 
  RUN add-pkg \
-        git g++ cmake make qtdeclarative5-dev \
-    qt5-qtbase qt5-qtmultimedia-dev qt5-qttools-dev && \
+        git g++ cmake make qtdeclarative5-dev qtbase5-dev && \
 # Compile RcloneBrowser
     git clone https://github.com/kapitainsky/RcloneBrowser.git /tmp && \
     mkdir /tmp/build && \
