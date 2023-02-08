@@ -29,7 +29,7 @@ RUN add-pkg \
     && mv /tmp/rclone-*-linux-${ARCH}/rclone /usr/bin \
     && rm -r /tmp/rclone* && \
 
-    add-pkg --virtual=build-dependencies \
+    add-pkg \
         build-base \
         cmake \
         make \
@@ -47,7 +47,7 @@ RUN add-pkg \
     cp /tmp/build/build/rclone-browser /usr/bin  && \
 
 # cleanup
-    apt purge build-dependencies && \
+
     rm -rf /tmp/*
     
 RUN sed-patch 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
