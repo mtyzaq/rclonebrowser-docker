@@ -6,7 +6,7 @@ FROM jlesage/baseimage-gui:debian-11-v4
 LABEL org.opencontainers.image.authors="xxx@163.com"
 
 # Set environment variables.
-ENV APP_NAME    "RcloneBrowser"
+ENV APP_NAME="RcloneBrowser"
 
 # Define build arguments
 ARG RCLONE_VERSION=current
