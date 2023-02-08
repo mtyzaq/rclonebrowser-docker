@@ -18,8 +18,9 @@ ENV ARCH=amd64
 WORKDIR /tmp
 
 # Install Rclone Browser dependencies
+RUN apt-get update -y
 RUN add-pkg \
-    curl unzip ca-certificates fonts-wqy-zenhei locales \
+    curl ca-certificates fonts-wqy-zenhei locales \
       libgl1 libglib2.0-0 \
 
     && cd /tmp \
