@@ -52,15 +52,6 @@ RUN apk --no-cache add \
      apk del --purge build-dependencies && \
     rm -rf /tmp/*
 
-# Maximize only the main/initial window.
-RUN \
-    sed-patch 's/<application type="normal">/<application type="normal" title="Rclone Browser">/' \
-        /etc/xdg/openbox/rc.xml
-
-# Generate and install favicons.
-RUN \
-    APP_ICON_URL=https://github.com/rclone/rclone/raw/master/graphics/logo/logo_symbol/logo_symbol_color_512px.png && \
-    install_app_icon.sh "$APP_ICON_URL"
 
 # Add files.
 COPY rootfs/ /
@@ -75,10 +66,3 @@ ENV APP_NAME="RcloneBrowser" \
 VOLUME ["/config"]
 VOLUME ["/media"]
 
-# Metadata.
-LABEL \
-      org.label-schema.name="rclonebrowser" \
-      org.label-schema.description="Docker container for RcloneBrowser" \
-      org.label-schema.version="unknown" \
-      org.label-schema.vcs-url="https://github.com/romancin/rclonebrowser-docker" \
-      org.label-schema.schema-version="1.0"
