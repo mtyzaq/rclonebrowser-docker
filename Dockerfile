@@ -20,7 +20,7 @@ WORKDIR /tmp
 # Install Rclone Browser dependencies
 
 RUN add-pkg \
-    wget unzip cmake git ca-certificates fonts-wqy-zenhei locales \
+    wget unzip fuse dbus xterm ca-certificates fonts-wqy-zenhei locales \
     libgl1 libglib2.0-0 \
 
     && cd /tmp \
@@ -29,6 +29,14 @@ RUN add-pkg \
     && mv /tmp/rclone-*-linux-${ARCH}/rclone /usr/bin \
     && rm -r /tmp/rclone* && \
 
+    add-pkg --virtual=build-dependencies \
+        build-base \
+        cmake \
+        make \
+        gcc \
+        git \
+        qt5-qtbase qt5-qtmultimedia-dev qt5-qttools-dev && \
+    
 # Compile RcloneBrowser
     git clone https://github.com/kapitainsky/RcloneBrowser.git /tmp && \
     mkdir /tmp/build && \
@@ -39,6 +47,7 @@ RUN add-pkg \
     cp /tmp/build/build/rclone-browser /usr/bin  && \
 
 # cleanup
+    apt purge build-dependencies && \
     rm -rf /tmp/*
     
 RUN sed-patch 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
