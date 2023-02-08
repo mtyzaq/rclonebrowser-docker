@@ -20,7 +20,7 @@ WORKDIR /tmp
 # Install Rclone Browser dependencies
 
 RUN add-pkg \
-    wget unzip git ca-certificates fonts-wqy-zenhei locales \
+    wget unzip cmake git ca-certificates fonts-wqy-zenhei locales \
     libgl1 libglib2.0-0 \
 
     && cd /tmp \
