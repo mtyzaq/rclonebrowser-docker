@@ -27,13 +27,10 @@ RUN add-pkg \
     && wget -q http://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
     && unzip /tmp/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
     && mv /tmp/rclone-*-linux-${ARCH}/rclone /usr/bin \
-    && rm -r /tmp/rclone* && \
+    && rm -r /tmp/rclone*
 
-    add-pkg \
-        cmake \
-        make \
-        gcc \
-        git && \
+ RUN add-pkg \
+        git g++ cmake make qtdeclarative5-dev && \
     
 # Compile RcloneBrowser
     git clone https://github.com/kapitainsky/RcloneBrowser.git /tmp && \
