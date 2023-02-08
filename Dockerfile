@@ -65,6 +65,7 @@ RUN \
 # Add files.
 COPY rootfs/ /
 COPY VERSION /
+COPY main-window-selection.jwmrc /etc/jwm/main-window-selection.jwmrc
 
 # Set environment variables.
 ENV APP_NAME="RcloneBrowser" \
