@@ -20,8 +20,8 @@ WORKDIR /tmp
 # Install Rclone Browser dependencies
 
 RUN add-pkg \
-    wget unzip ca-certificates fonts-wqy-zenhei locales \
-      libgl1 libglib2.0-0 \
+    wget unzip git ca-certificates fonts-wqy-zenhei locales \
+    libgl1 libglib2.0-0 \
 
     && cd /tmp \
     && wget -q http://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
