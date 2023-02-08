@@ -36,9 +36,8 @@ RUN add-pkg \
     mkdir /tmp/build && \
     cd /tmp/build && \
     cmake .. && \
-    make --build . && \
-    ls -l /tmp/build && \
-    cp /tmp/build/build/rclone-browser /usr/bin  && \
+    make  && \
+    make install  && \
 
 
 # cleanup
