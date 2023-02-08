@@ -33,12 +33,11 @@ RUN add-pkg \
         git g++ cmake make qtdeclarative5-dev && \
     
 # Compile RcloneBrowser
-    git clone https://github.com/kapitainsky/RcloneBrowser.git /tmp && \
-    mkdir /tmp/build && \
-    cd /tmp/build && \
-    cmake .. -DCMAKE_PREFIX_PATH:PATH=/usr/local/lib/qt5/cmake && \
-    make && \
-    make install  && \
+    cd /tmp \
+    wget -q https://github.com/kapitainsky/RcloneBrowser/releases/download/1.8.0/rclone-browser-1.8.0-a0b66c6-linux-x86_64.AppImage && \
+    chmod u + x rclone-browser-1.8.0-a0b66c6-linux-x86_64.AppImage && \
+    ./aplicacion.rclone-browser-1.8.0-a0b66c6-linux-x86_64.AppImage && \
+
 
 # cleanup
 
