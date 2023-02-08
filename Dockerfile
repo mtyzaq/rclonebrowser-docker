@@ -36,7 +36,7 @@ RUN add-pkg \
     mkdir /tmp/build && \
     cd /tmp/build && \
     cmake .. && \
-    make  && \
+    cmake --build . && \
     make install  && \
 
 
