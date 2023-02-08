@@ -36,7 +36,7 @@ RUN add-pkg \
     git clone https://github.com/kapitainsky/RcloneBrowser.git /tmp && \
     mkdir /tmp/build && \
     cd /tmp/build && \
-    cmake .. && \
+    cmake .. -DCMAKE_PREFIX_PATH:PATH=/usr/local/lib/qt5/cmake && \
     make && \
     make install  && \
 
